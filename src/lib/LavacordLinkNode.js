@@ -1,19 +1,20 @@
 const WebSocket = require('ws')
+const LavacordLinkerManager = require('./LavacordLinkManager')
 
 /**
  * Represents a Lavalink node instance
  */
-class GorilinkNode {
+class LavacordLinkNode {
 
   /**
    * The constructor of the LavalinkNode
-   * @param {GorilinkManager} manager manager of lavalink node
+   * @param {LavacordLinkerManager} manager manager of lavalink node
    * @param {Object} options options of the lavalink node
    */
   constructor(manager, options = {}) {
     /**
-     * GorilinkManager instance
-     * @type {GorilinkManager}
+     * LavacordLinkerManager instance
+     * @type {LavacordLinkerManager}
      */
     this.manager = manager
 
@@ -136,8 +137,8 @@ class GorilinkNode {
 
     /**
      * Lavalink node connect event
-     * @event GorilinkManager#nodeConnect
-     * @type {GorilinkNode}
+     * @event LavacordLinkerManager#nodeConnect
+     * @type {LavacordLinkNode}
      */
     this.manager.emit('nodeConnect', this)
     this.connected = true
@@ -173,9 +174,9 @@ class GorilinkNode {
   onClose(event) {
     /**
      * Lavalink node close event
-     * @event GorilinkManager#nodeClose
+     * @event LavacordLinkerManager#nodeClose
      * @property {Object} event - WebSocket event
-     * @property {GorilinkNode} node - Closed lavalink node
+     * @property {LavacordLinkNode} node - Closed lavalink node
      */
     this.manager.emit('nodeClose', event, this)
 
@@ -193,8 +194,8 @@ class GorilinkNode {
 
     /**
      * Lavalink node error event
-     * @event GorilinkManager#nodeError
-     * @property {GorilinkNode} node - Node on which the error occurred
+     * @event LavacordLinkerManager#nodeError
+     * @property {LavacordLinkNode} node - Node on which the error occurred
      * @property {Object} err - Error stack
      */
     this.manager.emit('nodeError', this, err)
@@ -213,8 +214,8 @@ class GorilinkNode {
 
       /**
        * Emitted when trying to reconnect with the lavalink node
-       * @event GorilinkManager#nodeReconnect
-       * @type {GorilinkNode}
+       * @event LavacordLinkerManager#nodeReconnect
+       * @type {LavacordLinkNode}
        */
       this.manager.emit('nodeReconnect', this)
       this.connect()
@@ -277,4 +278,4 @@ class GorilinkNode {
   }
 }
 
-module.exports = GorilinkNode
+module.exports = LavacordLinkNode
